@@ -4,14 +4,16 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta http-equiv="X-Frame-Options" content="ALLOWALL"/>
-<title>SNF National Research Tool v6.0</title>
+<title>SNF National Research Tool v7.0</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{width:100%;min-height:100%;font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1e293b;font-size:13px;}
+
 #hdr{background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;padding:12px 16px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.3);}
 #hdr h1{font-size:1rem;font-weight:800;margin-bottom:2px;}
 #hdr p{font-size:0.65rem;color:#93c5fd;}
 #hdr-btns{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+
 .btn{padding:5px 12px;border:none;border-radius:7px;font-size:0.72rem;font-weight:700;cursor:pointer;transition:opacity 0.15s;}
 .btn:hover{opacity:0.85;}
 .btn:disabled{opacity:0.4;cursor:not-allowed;}
@@ -20,22 +22,28 @@ html,body{width:100%;min-height:100%;font-family:'Segoe UI',Arial,sans-serif;bac
 .btn-purple{background:#7c3aed;color:#fff;}
 .btn-white{background:#fff;color:#1e3a8a;}
 .btn-gray{background:#6b7280;color:#fff;}
+.btn-orange{background:#ea580c;color:#fff;}
+
 .wrap{max-width:100%;padding:10px 12px;}
+
 .banner{border-radius:8px;padding:10px 14px;font-size:0.75rem;margin-bottom:10px;line-height:1.5;}
 .banner-info{background:#eff6ff;border:1px solid #bfdbfe;color:#1d4ed8;}
 .banner-success{background:#f0fdf4;border:1px solid #86efac;color:#166534;}
 .banner-error{background:#fef2f2;border:1px solid #fca5a5;color:#991b1b;}
 .banner-warn{background:#fefce8;border:1px solid #fde047;color:#854d0e;}
+
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:10px;}
 .stat{background:#fff;border-radius:9px;padding:10px;box-shadow:0 1px 3px rgba(0,0,0,0.08);}
 .stat-l{font-size:0.6rem;text-transform:uppercase;font-weight:700;color:#94a3b8;letter-spacing:0.04em;}
 .stat-v{font-size:1.4rem;font-weight:900;margin-top:2px;line-height:1.1;}
 .stat-s{font-size:0.6rem;color:#94a3b8;margin-top:2px;}
+
 .filters{background:#fff;border-radius:9px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,0.08);margin-bottom:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end;}
 .fg{display:flex;flex-direction:column;gap:3px;}
 .fl{font-size:0.6rem;font-weight:700;color:#64748b;text-transform:uppercase;}
 .fc{font-size:0.72rem;padding:5px 9px;border:1px solid #cbd5e1;border-radius:7px;background:#fff;color:#1e293b;outline:none;}
 .fc:focus{border-color:#3b82f6;box-shadow:0 0 0 2px rgba(59,130,246,0.2);}
+
 .comp{background:#fff;border-radius:9px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,0.08);margin-bottom:10px;}
 .comp h3{font-size:0.72rem;font-weight:800;color:#374151;margin-bottom:10px;}
 .comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;}
@@ -44,19 +52,22 @@ html,body{width:100%;min-height:100%;font-family:'Segoe UI',Arial,sans-serif;bac
 .comp-track{background:#e2e8f0;border-radius:9999px;height:7px;}
 .comp-fill{border-radius:9999px;height:7px;transition:width 0.6s;}
 .comp-meta{font-size:0.6rem;color:#94a3b8;margin-top:3px;}
+
 .tbl-wrap{background:#fff;border-radius:9px;box-shadow:0 1px 3px rgba(0,0,0,0.08);overflow-x:auto;margin-bottom:10px;}
 table{width:100%;border-collapse:collapse;min-width:900px;}
-thead tr.th1 th{background:#1e3a8a;color:#fff;padding:8px 8px;text-align:left;font-size:0.62rem;font-weight:700;text-transform:uppercase;white-space:nowrap;cursor:pointer;user-select:none;}
+thead tr.th1 th{background:#1e3a8a;color:#fff;padding:8px;text-align:left;font-size:0.62rem;font-weight:700;text-transform:uppercase;white-space:nowrap;cursor:pointer;user-select:none;}
 thead tr.th1 th:hover{background:#1e40af;}
 thead tr.th2 td{font-size:0.58rem;padding:3px 8px;text-align:center;}
 tbody tr{border-bottom:1px solid #f1f5f9;}
 tbody tr:hover td{background:#f8fafc;}
 tbody td{padding:6px 8px;vertical-align:middle;font-size:0.72rem;color:#334155;}
-.cf{background:#dcfce7;border:1px solid #86efac;color:#166534;border-radius:4px;padding:2px 6px;display:inline-block;font-size:0.68rem;max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+.cf{background:#dcfce7;border:1px solid #86efac;color:#166534;border-radius:4px;padding:2px 6px;display:inline-block;font-size:0.68rem;max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .cm{background:#fee2e2;border:1px dashed #fca5a5;color:#991b1b;border-radius:4px;padding:2px 6px;display:inline-block;font-size:0.68rem;}
 .ce{background:#fffde7;border:1px dashed #f59e0b;border-radius:4px;padding:2px 5px;display:inline-block;font-size:0.68rem;min-width:70px;outline:none;cursor:text;}
 .ce:focus{background:#fff;border-color:#3b82f6;outline:2px solid rgba(59,130,246,0.25);}
 .ce:empty:before{content:attr(data-ph);color:#d1d5db;font-style:italic;}
+
 .bdg{display:inline-block;border-radius:9999px;padding:1px 7px;font-size:0.62rem;font-weight:700;}
 .bdg-b{background:#dbeafe;color:#1e40af;}
 .bdg-s{background:#dcfce7;color:#166534;}
@@ -64,8 +75,9 @@ tbody td{padding:6px 8px;vertical-align:middle;font-size:0.72rem;color:#334155;}
 .bdg-l{background:#fee2e2;color:#991b1b;}
 .bdg-xl{background:#fce7f3;color:#9d174d;}
 .star{color:#f59e0b;}
+
 .modal-bg{position:fixed;inset:0;background:rgba(15,23,42,0.6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;}
-.modal{background:#fff;border-radius:14px;width:100%;max-width:580px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);}
+.modal{background:#fff;border-radius:14px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);}
 .modal-hdr{background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;padding:14px 18px;border-radius:14px 14px 0 0;display:flex;justify-content:space-between;align-items:center;}
 .modal-hdr h2{font-size:0.88rem;font-weight:800;}
 .modal-x{background:none;border:none;color:#93c5fd;font-size:1.4rem;cursor:pointer;line-height:1;padding:0 4px;}
@@ -75,32 +87,45 @@ tbody td{padding:6px 8px;vertical-align:middle;font-size:0.72rem;color:#334155;}
 .mf-l{font-size:0.6rem;color:#94a3b8;font-weight:700;text-transform:uppercase;margin-bottom:3px;}
 .mf-v{font-size:0.78rem;color:#1e293b;}
 .modal-ftr{padding:10px 14px;display:flex;justify-content:flex-end;gap:6px;border-top:1px solid #f1f5f9;}
-.prog-wrap{background:#fff;border-radius:9px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,0.08);margin-bottom:10px;}
-.prog-top{display:flex;justify-content:space-between;font-size:0.68rem;color:#64748b;margin-bottom:5px;}
-.prog-track{background:#e2e8f0;border-radius:9999px;height:8px;}
-.prog-fill{border-radius:9999px;height:8px;transition:width 0.3s,background 0.3s;}
-.prog-log{background:#f8fafc;border-radius:7px;padding:7px;max-height:70px;overflow-y:auto;margin-top:7px;font-size:0.62rem;color:#64748b;font-family:monospace;}
+
+/* PROGRESS - prominent for API loading */
+.prog-card{background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.1);margin-bottom:10px;border:2px solid #bfdbfe;}
+.prog-title{font-size:0.8rem;font-weight:800;color:#1e3a8a;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
+.prog-track{background:#e2e8f0;border-radius:9999px;height:14px;overflow:hidden;}
+.prog-fill{border-radius:9999px;height:14px;transition:width 0.4s,background 0.3s;background:#3b82f6;}
+.prog-meta{display:flex;justify-content:space-between;font-size:0.68rem;color:#64748b;margin-top:6px;}
+.prog-log{background:#f8fafc;border-radius:7px;padding:8px;max-height:90px;overflow-y:auto;margin-top:8px;font-size:0.65rem;color:#475569;font-family:monospace;line-height:1.6;}
+.prog-counts{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;}
+.prog-count{background:#eff6ff;border-radius:8px;padding:8px;text-align:center;}
+.prog-count-v{font-size:1.1rem;font-weight:900;color:#1d4ed8;}
+.prog-count-l{font-size:0.6rem;color:#64748b;margin-top:1px;}
+
 .legend{display:flex;flex-wrap:wrap;gap:10px;font-size:0.62rem;color:#94a3b8;padding:5px 2px 10px;}
-.upload-zone{border:2px dashed #93c5fd;border-radius:9px;padding:18px;text-align:center;background:#eff6ff;cursor:pointer;transition:all 0.2s;margin-top:8px;}
-.upload-zone:hover{border-color:#2563eb;background:#dbeafe;}
-.fcard{border:2px solid #e2e8f0;border-radius:10px;padding:12px;margin-bottom:8px;}
-.fcard-t{font-size:0.8rem;font-weight:800;color:#1e3a8a;margin-bottom:4px;}
-.fcard-d{font-size:0.68rem;color:#64748b;margin-bottom:8px;line-height:1.5;}
-.fcard-steps{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:9px;font-size:0.68rem;color:#1d4ed8;margin-bottom:8px;line-height:1.8;}
+
+/* API STATUS CARD */
+.api-status{background:#fff;border-radius:10px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,0.08);margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+.api-dot{width:10px;height:10px;border-radius:9999px;flex-shrink:0;}
+.api-dot-live{background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,0.2);}
+.api-dot-loading{background:#f59e0b;animation:pulse 1s infinite;}
+.api-dot-error{background:#ef4444;}
+.api-dot-idle{background:#d1d5db;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
 ::-webkit-scrollbar{height:4px;width:4px;}
 ::-webkit-scrollbar-track{background:#f1f5f9;}
 ::-webkit-scrollbar-thumb{background:#93c5fd;border-radius:4px;}
 @media(max-width:600px){.modal-body{grid-template-columns:1fr;}.stats{grid-template-columns:repeat(2,1fr);}}
-@media print{#hdr-btns,.filters,#progWrap,.legend{display:none!important;}body{background:#fff;}}
+@media print{#hdr-btns,.filters,#progCard,.legend{display:none!important;}body{background:#fff;}}
 </style>
 </head>
 <body>
 
 <div id="hdr">
-  <h1>&#127973; Skilled Nursing Facility National Research Tool</h1>
-  <p>National CMS Data &bull; All 50 States &bull; v6.0 &bull; Zero external dependencies</p>
+  <h1>&#127973; SNF National Research Tool &mdash; CMS Live Data</h1>
+  <p>Polls data.cms.gov directly &bull; ~15,000 facilities &bull; All 50 States &bull; v7.0</p>
   <div id="hdr-btns">
-    <button class="btn btn-green" onclick="showFetchModal()">&#9889; Load CMS Data</button>
+    <button class="btn btn-green" id="loadBtn" onclick="startLoad()">&#9889; Load National CMS Data</button>
+    <button class="btn btn-purple" onclick="loadDemo()">&#128301; Demo Mode</button>
     <button class="btn btn-white" onclick="doExport()">&#11015; Export CSV</button>
     <button class="btn btn-white" onclick="window.print()">&#128424; Print</button>
     <button class="btn btn-gray" onclick="doReset()">&#8635; Reset</button>
@@ -108,19 +133,56 @@ tbody td{padding:6px 8px;vertical-align:middle;font-size:0.72rem;color:#334155;}
 </div>
 
 <div class="wrap">
+
+  <!-- BANNER -->
   <div id="banner" style="display:none;" class="banner"></div>
 
-  <div id="progWrap" style="display:none;" class="prog-wrap">
-    <div class="prog-top"><span id="progLbl">Loading...</span><span id="progPct">0%</span></div>
-    <div class="prog-track"><div id="progFill" class="prog-fill" style="width:0%;background:#3b82f6;"></div></div>
+  <!-- API STATUS -->
+  <div id="apiStatusCard" class="api-status" style="display:none;">
+    <div id="apiDot" class="api-dot api-dot-idle"></div>
+    <div>
+      <div id="apiStatusText" style="font-size:0.75rem;font-weight:700;color:#1e293b;"></div>
+      <div id="apiStatusSub" style="font-size:0.65rem;color:#64748b;margin-top:1px;"></div>
+    </div>
+    <button id="cancelBtn" class="btn btn-gray" onclick="cancelLoad()" style="margin-left:auto;display:none;font-size:0.65rem;padding:4px 10px;">&#9632; Cancel</button>
+  </div>
+
+  <!-- PROGRESS -->
+  <div id="progCard" class="prog-card" style="display:none;">
+    <div class="prog-title">
+      <span id="progTitle">&#128257; Fetching CMS Data...</span>
+      <span id="progPct" style="font-size:1rem;font-weight:900;color:#2563eb;">0%</span>
+    </div>
+    <div class="prog-track">
+      <div id="progFill" class="prog-fill" style="width:0%;"></div>
+    </div>
+    <div class="prog-meta">
+      <span id="progLbl">Starting...</span>
+      <span id="progRecs">0 records loaded</span>
+    </div>
+    <div class="prog-counts">
+      <div class="prog-count">
+        <div class="prog-count-v" id="pc-calls">0</div>
+        <div class="prog-count-l">API Calls</div>
+      </div>
+      <div class="prog-count">
+        <div class="prog-count-v" id="pc-recs">0</div>
+        <div class="prog-count-l">Records</div>
+      </div>
+      <div class="prog-count">
+        <div class="prog-count-v" id="pc-states">0</div>
+        <div class="prog-count-l">States Found</div>
+      </div>
+    </div>
     <div id="progLog" class="prog-log"></div>
   </div>
 
+  <!-- STATS -->
   <div class="stats">
     <div class="stat" style="border-left:4px solid #3b82f6;">
       <div class="stat-l">Total Loaded</div>
       <div class="stat-v" id="s-total" style="color:#1d4ed8;">0</div>
-      <div class="stat-s">facilities</div>
+      <div class="stat-s">from CMS API</div>
     </div>
     <div class="stat" style="border-left:4px solid #22c55e;">
       <div class="stat-l">Showing</div>
@@ -130,7 +192,7 @@ tbody td{padding:6px 8px;vertical-align:middle;font-size:0.72rem;color:#334155;}
     <div class="stat" style="border-left:4px solid #f59e0b;">
       <div class="stat-l">States</div>
       <div class="stat-v" id="s-states" style="color:#d97706;">0</div>
-      <div class="stat-s">in view</div>
+      <div class="stat-s">in current view</div>
     </div>
     <div class="stat" style="border-left:4px solid #8b5cf6;">
       <div class="stat-l">Avg Beds</div>
@@ -149,6 +211,7 @@ tbody td{padding:6px 8px;vertical-align:middle;font-size:0.72rem;color:#334155;}
     </div>
   </div>
 
+  <!-- FILTERS -->
   <div class="filters">
     <div class="fg">
       <label class="fl">&#128269; Search</label>
@@ -163,20 +226,20 @@ tbody td{padding:6px 8px;vertical-align:middle;font-size:0.72rem;color:#334155;}
     <div class="fg">
       <label class="fl">&#128716; Beds</label>
       <select id="f-bd" class="fc" onchange="doFilter()">
-        <option value="">All</option>
+        <option value="">All Sizes</option>
         <option value="0-49">Under 50</option>
-        <option value="50-74">50-74</option>
-        <option value="75-99">75-99</option>
-        <option value="100-149">100-149</option>
-        <option value="150-199">150-199</option>
+        <option value="50-74">50&ndash;74</option>
+        <option value="75-99">75&ndash;99</option>
+        <option value="100-149">100&ndash;149</option>
+        <option value="150-199">150&ndash;199</option>
         <option value="200-9999">200+</option>
       </select>
     </div>
     <div class="fg">
       <label class="fl">&#11088; Min Stars</label>
       <select id="f-sr" class="fc" onchange="doFilter()">
-        <option value="">Any</option>
-        <option value="5">5 Stars</option>
+        <option value="">Any Rating</option>
+        <option value="5">5 Stars Only</option>
         <option value="4">4+ Stars</option>
         <option value="3">3+ Stars</option>
         <option value="2">2+ Stars</option>
@@ -185,7 +248,7 @@ tbody td{padding:6px 8px;vertical-align:middle;font-size:0.72rem;color:#334155;}
     <div class="fg">
       <label class="fl">&#127970; Ownership</label>
       <select id="f-ow" class="fc" onchange="doFilter()">
-        <option value="">All</option>
+        <option value="">All Types</option>
         <option value="profit">For Profit</option>
         <option value="nonprofit">Non Profit</option>
         <option value="government">Government</option>
@@ -205,24 +268,29 @@ tbody td{padding:6px 8px;vertical-align:middle;font-size:0.72rem;color:#334155;}
     </div>
   </div>
 
+  <!-- COMPLETENESS -->
   <div class="comp" id="compPanel" style="display:none;">
     <h3>&#128203; Data Completeness &mdash; <span id="compSub"></span></h3>
     <div class="comp-grid" id="compGrid"></div>
   </div>
 
-  <div id="noData" class="banner banner-info">Loading demo data automatically...</div>
-  <div id="noResults" class="banner banner-warn" style="display:none;">No facilities match your filters. Try broadening your search.</div>
-
+  <!-- TABLE -->
+  <div id="noData" class="banner banner-info">
+    &#127973; Welcome! Click <b>Load National CMS Data</b> to fetch all ~15,000 US nursing facilities directly from data.cms.gov &mdash; or click <b>Demo Mode</b> to explore with sample data first.
+  </div>
+  <div id="noResults" class="banner banner-warn" style="display:none;">
+    &#128269; No facilities match your current filters.
+  </div>
   <div class="tbl-wrap" id="tblWrap" style="display:none;">
     <table id="mainTbl">
       <thead>
         <tr class="th1">
-          <th onclick="doSort('provnum')">ID</th>
-          <th onclick="doSort('provname')">Facility &#8597;</th>
+          <th onclick="doSort('provnum')">CMS ID</th>
+          <th onclick="doSort('provname')">Facility Name &#8597;</th>
           <th onclick="doSort('city')">City &#8597;</th>
-          <th onclick="doSort('state')">State &#8597;</th>
+          <th onclick="doSort('state')">ST &#8597;</th>
           <th onclick="doSort('zip')">ZIP</th>
-          <th onclick="doSort('bedcert')">Beds &#8597;</th>
+          <th onclick="doSort('bedcert')" style="text-align:center;">Beds &#8597;</th>
           <th style="background:#14532d;">&#128222; Phone</th>
           <th style="background:#14532d;">&#128205; Address</th>
           <th style="background:#14532d;" onclick="doSort('stars')">&#11088; Stars &#8597;</th>
@@ -233,65 +301,21 @@ tbody td{padding:6px 8px;vertical-align:middle;font-size:0.72rem;color:#334155;}
           <th>&#128203; Notes</th>
         </tr>
         <tr class="th2" style="background:#1e3a8a;">
-          <td colspan="6" style="color:#93c5fd;">&#8212; Facility Info &#8212;</td>
-          <td colspan="5" style="background:#14532d;color:#86efac;">&#8212; CMS Data &#8212;</td>
+          <td colspan="6" style="color:#93c5fd;">&#8212; Source Info &#8212;</td>
+          <td colspan="5" style="background:#14532d;color:#86efac;">&#8212; Live from data.cms.gov &#8212;</td>
           <td colspan="3" style="color:#93c5fd;">&#8212; Manual Entry &#8212;</td>
         </tr>
       </thead>
       <tbody id="tblBody"></tbody>
     </table>
   </div>
-
   <div class="legend" id="legendRow" style="display:none;">
     <span><span class="cf">Green</span> = CMS data present</span>
-    <span><span class="cm">Red</span> = Missing from CMS</span>
-    <span><span class="ce">Yellow</span> = Click to edit</span>
-    <span style="margin-left:auto;">&#128161; Click facility name for full detail</span>
+    <span><span class="cm">Red</span> = Missing in CMS</span>
+    <span><span class="ce">Yellow</span> = Click to enter manually</span>
+    <span style="margin-left:auto;">&#128161; Click any facility name for full detail &bull; Click column header to sort</span>
   </div>
-</div>
 
-<!-- FETCH MODAL -->
-<div id="fetchModal" class="modal-bg" style="display:none;">
-  <div class="modal" style="max-width:520px;">
-    <div class="modal-hdr">
-      <h2>&#9889; Load CMS Data</h2>
-      <button class="modal-x" onclick="closeFetch()">&times;</button>
-    </div>
-    <div style="padding:14px;">
-      <div class="banner banner-info" style="margin-bottom:10px;">Choose how to load CMS nursing home data below.</div>
-
-      <div class="fcard">
-        <div class="fcard-t">&#127760; Method 1 &mdash; Live CMS API</div>
-        <div class="fcard-d">Fetches from data.cms.gov via CORS proxy. Requires internet. May be blocked by some networks.</div>
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-          <button class="btn btn-blue" onclick="doLiveAPI()">Try Live API</button>
-          <span id="apiStatus" style="font-size:0.68rem;color:#64748b;"></span>
-        </div>
-      </div>
-
-      <div class="fcard">
-        <div class="fcard-t">&#128229; Method 2 &mdash; Upload CMS CSV <span style="background:#dcfce7;color:#166534;font-size:0.6rem;padding:1px 7px;border-radius:9999px;margin-left:5px;">Recommended</span></div>
-        <div class="fcard-d">Download the free national CSV from CMS. Works 100% reliably with all 50 states and 15,000+ facilities.</div>
-        <div class="fcard-steps">
-          <b>1.</b> Go to <a href="https://data.cms.gov/provider-data/dataset/4pq5-n9py" target="_blank" style="color:#1d4ed8;">data.cms.gov/provider-data/dataset/4pq5-n9py</a><br/>
-          <b>2.</b> Click Download then CSV (NH_ProviderInfo file)<br/>
-          <b>3.</b> Upload the file below
-        </div>
-        <div class="upload-zone" onclick="document.getElementById('csvIn').click();" id="dropZone">
-          <div style="font-size:1.6rem;margin-bottom:4px;">&#128196;</div>
-          <div style="font-size:0.78rem;font-weight:700;color:#1d4ed8;">Click to upload CMS CSV</div>
-          <div style="font-size:0.65rem;color:#64748b;margin-top:2px;">NH_ProviderInfo_*.csv</div>
-        </div>
-        <input type="file" id="csvIn" accept=".csv" style="display:none;" onchange="handleCSV(event)"/>
-      </div>
-
-      <div class="fcard">
-        <div class="fcard-t">&#128301; Method 3 &mdash; Demo Mode</div>
-        <div class="fcard-d">50 sample facilities across 20 states. Loads instantly for exploring the tool.</div>
-        <button class="btn btn-purple" onclick="loadDemo()">Load Demo (50 Facilities)</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- DETAIL MODAL -->
@@ -310,13 +334,21 @@ tbody td{padding:6px 8px;vertical-align:middle;font-size:0.72rem;color:#334155;}
 </div>
 
 <script>
+// ── STATE ──────────────────────────────────────────────────────
 var ALL = [];
 var FILT = [];
 var MANUAL = {};
 var SKEY = 'provname';
 var SDIR = 1;
+var LOADING = false;
+var CANCEL = false;
+var TOTAL_EXPECTED = 15000;
 
-/* ── IFRAME RESIZE ── */
+// ── CMS API CONFIG ─────────────────────────────────────────────
+var CMS_BASE = 'https://data.cms.gov/resource/4pq5-n9py.json';
+var PAGE_SIZE = 1000;
+
+// ── IFRAME RESIZE ──────────────────────────────────────────────
 function ping() {
   try {
     var h = document.body.scrollHeight + 40;
@@ -324,300 +356,333 @@ function ping() {
     window.parent.postMessage({height:h}, '*');
   } catch(e) {}
 }
-setInterval(ping, 1500);
+setInterval(ping, 2000);
+window.addEventListener('load', ping);
 
-/* ── DEMO DATA ── */
-var DEMO = [
+// ── LOAD NATIONAL DATA ─────────────────────────────────────────
+function startLoad() {
+  if (LOADING) return;
+  LOADING = true;
+  CANCEL = false;
+  ALL = [];
+
+  // Show UI
+  document.getElementById('progCard').style.display = 'block';
+  document.getElementById('apiStatusCard').style.display = 'flex';
+  document.getElementById('cancelBtn').style.display = 'inline-block';
+  document.getElementById('loadBtn').disabled = true;
+  document.getElementById('noData').style.display = 'none';
+  document.getElementById('progLog').innerHTML = '';
+
+  setApiStatus('loading', 'Connecting to CMS API...', 'data.cms.gov/resource/4pq5-n9py');
+  setP(2, 'Fetching page 1...', '0 records');
+  addLog('Starting national CMS data fetch');
+  addLog('Endpoint: ' + CMS_BASE);
+  addLog('Page size: ' + PAGE_SIZE + ' records per call');
+
+  fetchPage(0);
+}
+
+function fetchPage(offset) {
+  if (CANCEL) {
+    finishCancel();
+    return;
+  }
+
+  var callNum = Math.floor(offset / PAGE_SIZE) + 1;
+  var url = CMS_BASE + '?%24limit=' + PAGE_SIZE + '&%24offset=' + offset + '&%24order=provname';
+
+  addLog('Call ' + callNum + ': offset=' + offset);
+  document.getElementById('pc-calls').textContent = callNum;
+
+  fetch(url, {
+    headers: { 'Accept': 'application/json', 'X-App-Token': '' },
+    signal: AbortSignal.timeout(20000)
+  })
+  .then(function(res) {
+    if (!res.ok) throw new Error('HTTP ' + res.status + ' — ' + res.statusText);
+    return res.json();
+  })
+  .then(function(data) {
+    if (!Array.isArray(data)) throw new Error('Unexpected response format');
+
+    // Normalise and append
+    for (var i = 0; i < data.length; i++) {
+      ALL.push(norm(data[i]));
+    }
+
+    // Update progress counters
+    var stateSet = {};
+    for (var j = 0; j < ALL.length; j++) { stateSet[ALL[j].state] = 1; }
+    var stateCount = Object.keys(stateSet).length;
+
+    document.getElementById('pc-recs').textContent = ALL.length.toLocaleString();
+    document.getElementById('pc-states').textContent = stateCount;
+    document.getElementById('s-total').textContent = ALL.length.toLocaleString();
+
+    var pct = Math.min(98, Math.round((ALL.length / TOTAL_EXPECTED) * 100));
+    setP(pct, 'Loaded ' + ALL.length.toLocaleString() + ' facilities...', ALL.length.toLocaleString() + ' records');
+    setApiStatus('loading', 'Loading... ' + ALL.length.toLocaleString() + ' records so far', stateCount + ' states found');
+
+    addLog('Page ' + callNum + ': got ' + data.length + ' records (total: ' + ALL.length + ')');
+
+    if (data.length === PAGE_SIZE && !CANCEL) {
+      // More pages — fetch next
+      setTimeout(function() { fetchPage(offset + PAGE_SIZE); }, 100);
+    } else {
+      // Done!
+      finishLoad();
+    }
+  })
+  .catch(function(err) {
+    addLog('ERROR: ' + err.message);
+    if (ALL.length > 0) {
+      // We got some data — use what we have
+      addLog('Using partial data: ' + ALL.length + ' records');
+      finishLoad();
+    } else {
+      // Complete failure
+      LOADING = false;
+      document.getElementById('loadBtn').disabled = false;
+      document.getElementById('cancelBtn').style.display = 'none';
+      setApiStatus('error', 'API Error: ' + err.message, 'Try Demo Mode while on a restricted network');
+      setP(0, 'Failed', '0 records');
+      document.getElementById('progFill').style.background = '#ef4444';
+      setBanner('error',
+        '&#10006; <b>CMS API Error:</b> ' + err.message + '<br/>' +
+        '&#128161; <b>Possible causes:</b> Network restriction, VPN, or corporate firewall blocking data.cms.gov<br/>' +
+        '&#128301; <b>Quick fix:</b> Click <b>Demo Mode</b> to explore the tool &mdash; or try from a non-corporate network.<br/>' +
+        '&#128229; <b>Alternative:</b> Download CSV from <a href="https://data.cms.gov/provider-data/dataset/4pq5-n9py" target="_blank">data.cms.gov</a> and load it below.' +
+        '<div style="margin-top:8px;"><label class="fl" style="font-size:0.7rem;font-weight:700;color:#991b1b;">Upload CSV instead: </label>' +
+        '<input type="file" id="csvFallback" accept=".csv" onchange="handleCSV(event)" style="font-size:0.72rem;margin-top:4px;"/></div>'
+      );
+      document.getElementById('noData').style.display = 'block';
+    }
+  });
+}
+
+function finishLoad() {
+  LOADING = false;
+  CANCEL = false;
+  document.getElementById('loadBtn').disabled = false;
+  document.getElementById('cancelBtn').style.display = 'none';
+
+  ALL = ALL.filter(function(r) { return r.provname; });
+  ALL.forEach(function(r) { if (!MANUAL[r.provnum]) MANUAL[r.provnum] = {email:'',website:'',notes:''}; });
+
+  addLog('COMPLETE: ' + ALL.length + ' valid facilities');
+  setP(100, 'Complete!', ALL.length.toLocaleString() + ' facilities loaded');
+  document.getElementById('progFill').style.background = '#22c55e';
+  document.getElementById('progTitle').textContent = '&#10003; CMS Data Loaded Successfully';
+
+  var stateSet = {};
+  ALL.forEach(function(r) { stateSet[r.state] = 1; });
+  var sc = Object.keys(stateSet).length;
+  setApiStatus('live', ALL.length.toLocaleString() + ' facilities loaded from CMS', sc + ' states &bull; Last updated: ' + new Date().toLocaleTimeString());
+
+  buildStateDD();
+  doFilter();
+
+  setBanner('success',
+    '&#10003; <b>' + ALL.length.toLocaleString() + ' facilities</b> loaded live from <b>data.cms.gov</b> &bull; ' +
+    sc + ' states &bull; ' + Object.keys(MANUAL).length.toLocaleString() + ' records ready. ' +
+    'Use filters to drill down. Click any facility name for full detail. ' +
+    '<b style="color:#166534;">Green cells</b> = CMS data present &bull; ' +
+    '<b style="color:#991b1b;">Red cells</b> = missing from CMS.'
+  );
+  ping();
+}
+
+function finishCancel() {
+  LOADING = false;
+  document.getElementById('loadBtn').disabled = false;
+  document.getElementById('cancelBtn').style.display = 'none';
+  setApiStatus('idle', 'Load cancelled', ALL.length + ' records kept');
+  addLog('Cancelled by user. Keeping ' + ALL.length + ' records loaded so far.');
+  if (ALL.length > 0) {
+    ALL.forEach(function(r) { if (!MANUAL[r.provnum]) MANUAL[r.provnum] = {email:'',website:'',notes:''}; });
+    buildStateDD();
+    doFilter();
+    setBanner('warn', '&#9888; Load cancelled. <b>' + ALL.length.toLocaleString() + ' facilities</b> loaded so far are shown below. Click Load again for full dataset.');
+  }
+}
+
+function cancelLoad() {
+  CANCEL = true;
+  addLog('Cancel requested...');
+}
+
+// ── CSV FALLBACK ───────────────────────────────────────────────
+function handleCSV(evt) {
+  var file = evt.target.files ? evt.target.files[0] : null;
+  if (!file) return;
+  showProg();
+  setP(20, 'Parsing ' + Math.round(file.size/1024) + 'KB...', '');
+  addLog('CSV file: ' + file.name);
+  var rd = new FileReader();
+  rd.onload = function(e) {
+    setTimeout(function() { parseCSV(e.target.result, file.name); }, 80);
+  };
+  rd.readAsText(file);
+}
+
+function parseCSV(txt, fname) {
+  setP(40, 'Splitting rows...', '');
+  var nl = txt.indexOf('\r
+') >= 0 ? '\r
+' : '
+';
+  var lines = txt.split(nl);
+  var hdrs = csvR(lines[0]).map(function(h) { return h.toLowerCase().replace(/"/g,'').trim(); });
+  addLog('Columns: ' + hdrs.length + ' | Rows: ' + (lines.length-1));
+
+  function gc(row, names) {
+    for (var i = 0; i < names.length; i++) {
+      var idx = hdrs.indexOf(names[i]);
+      if (idx >= 0 && row[idx] !== undefined) return (row[idx]||'').replace(/"/g,'').trim();
+    }
+    return '';
+  }
+
+  setP(60, 'Building records...', '');
+  var recs = [];
+  for (var i = 1; i < lines.length; i++) {
+    if (!lines[i].trim()) continue;
+    var row = csvR(lines[i]);
+    recs.push(norm({
+      provnum:   gc(row,['provnum','federal provider number','cms certification number','ccn']),
+      provname:  gc(row,['provname','provider name','facility name']),
+      address:   gc(row,['address','provaddr','provider address','street address']),
+      city:      gc(row,['city','provcity','provider city']),
+      state:     gc(row,['state','provstate','provider state']),
+      zip:       gc(row,['zip','provzip','provider zip code','zip code']),
+      phone:     gc(row,['phone','provphone','telephone number','phone number']),
+      bedcert:   gc(row,['bedcert','number of certified beds','certified beds','beds']),
+      overall_rating: gc(row,['overall_rating','overall rating','overall star rating']),
+      ownership_type: gc(row,['ownership_type','ownership type','type of ownership']),
+      certification:  gc(row,['certification','certcat','provider type'])
+    }));
+  }
+  addLog('Parsed: ' + recs.length + ' records from CSV');
+  ALL = recs.filter(function(r){return r.provname;});
+  ALL.forEach(function(r){ if(!MANUAL[r.provnum]) MANUAL[r.provnum]={email:'',website:'',notes:''}; });
+  setP(100, 'Complete!', ALL.length.toLocaleString() + ' records');
+  document.getElementById('progFill').style.background = '#22c55e';
+  setApiStatus('live', ALL.length.toLocaleString() + ' facilities from CSV: ' + fname, '');
+  buildStateDD();
+  doFilter();
+  setBanner('success', '&#10003; <b>' + ALL.length.toLocaleString() + ' facilities</b> loaded from CSV: <b>' + fname + '</b>');
+  ping();
+}
+
+function csvR(line) {
+  var r=[], c='', q=false, i;
+  for (i=0;i<line.length;i++) {
+    var ch=line[i];
+    if(ch==='"'){q=!q;}
+    else if(ch===','&&!q){r.push(c);c='';}
+    else{c+=ch;}
+  }
+  r.push(c);
+  return r;
+}
+
+// ── DEMO DATA ──────────────────────────────────────────────────
+var DEMO=[
   {provnum:'015010',provname:'Crowne Health Care Of Springhill',address:'2 Mobile Infirmary Cir',city:'Mobile',state:'AL',zip:'36607',phone:'(251) 473-7481',bedcert:20,stars:3,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
   {provnum:'015002',provname:'East Alabama Medical Center SNF',address:'2000 Pepperell Pkwy',city:'Opelika',state:'AL',zip:'36801',phone:'(334) 749-3411',bedcert:26,stars:5,ownership:'Government - Hospital District',certified:'Medicare and Medicaid'},
-  {provnum:'015011',provname:'Springhill Manor Nursing Home',address:'3 Mobile Infirmary Cir',city:'Mobile',state:'AL',zip:'36607',phone:'(251) 342-7600',bedcert:34,stars:4,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
   {provnum:'015088',provname:'Fairview At Redstone Village',address:'3000 Redstone Rd',city:'Huntsville',state:'AL',zip:'35898',phone:'(256) 319-6800',bedcert:40,stars:4,ownership:'Non profit - Corporation',certified:'Medicare and Medicaid'},
   {provnum:'015043',provname:'Altoona Health And Rehab',address:'100 Hwy 75',city:'Altoona',state:'AL',zip:'35952',phone:'(205) 589-3100',bedcert:50,stars:2,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'015057',provname:'Highlands Health And Rehab',address:'211 Hospital Dr',city:'Scottsboro',state:'AL',zip:'35769',phone:'(256) 259-4444',bedcert:50,stars:3,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'015030',provname:'Russellville Health Care Inc',address:'315 Franklin St',city:'Russellville',state:'AL',zip:'35653',phone:'(256) 332-1226',bedcert:50,stars:2,ownership:'For profit - Individual',certified:'Medicare and Medicaid'},
-  {provnum:'015025',provname:'Burns Nursing Home Inc',address:'410 Trojan Dr',city:'Russellville',state:'AL',zip:'35653',phone:'(256) 332-1538',bedcert:57,stars:3,ownership:'For profit - Individual',certified:'Medicare and Medicaid'},
-  {provnum:'015066',provname:'Lauderdale Christian Nursing Home',address:'12532 Lauderdale Dr',city:'Killen',state:'AL',zip:'35645',phone:'(256) 757-4441',bedcert:58,stars:4,ownership:'Non profit - Church related',certified:'Medicare and Medicaid'},
-  {provnum:'015072',provname:'Meadowview Nursing Center',address:'100 Meadowview Ln',city:'Pell City',state:'AL',zip:'35125',phone:'(205) 338-9898',bedcert:59,stars:3,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'015060',provname:'Walker Rehabilitation Center Inc',address:'200 Medical Dr',city:'Carbon Hill',state:'AL',zip:'35549',phone:'(205) 924-4471',bedcert:59,stars:2,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'015091',provname:'Willowbrooke Court At Magnolia Trace',address:'7000 Magnolia Trace',city:'Huntsville',state:'AL',zip:'35802',phone:'(256) 882-0220',bedcert:59,stars:5,ownership:'Non profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'015018',provname:'El Reposo Nursing Facility',address:'200 W College St',city:'Florence',state:'AL',zip:'35630',phone:'(256) 764-1481',bedcert:60,stars:1,ownership:'For profit - Individual',certified:'Medicaid only'},
-  {provnum:'015039',provname:'Regency Health Care And Rehabilitation',address:'4040 Balmoral Dr',city:'Huntsville',state:'AL',zip:'35801',phone:'(256) 539-1580',bedcert:60,stars:3,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'015098',provname:'Westminster Village',address:'1 Westminster Way',city:'Spanish Fort',state:'AL',zip:'36527',phone:'(251) 625-5900',bedcert:60,stars:4,ownership:'Non profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'015021',provname:'Evergreen Nursing Home',address:'101 Kimberly Ln',city:'Evergreen',state:'AL',zip:'36401',phone:'(251) 578-4466',bedcert:61,stars:2,ownership:'For profit - Individual',certified:'Medicare and Medicaid'},
-  {provnum:'015070',provname:'Lafayette Nursing Home',address:'301 Medical Dr',city:'Lafayette',state:'AL',zip:'36862',phone:'(334) 864-9311',bedcert:63,stars:3,ownership:'Government - County',certified:'Medicare and Medicaid'},
-  {provnum:'015084',provname:'Terrace Manor Nursing And Rehabilitation',address:'500 Jackson Heights',city:'Russellville',state:'AL',zip:'35653',phone:'(256) 332-4560',bedcert:63,stars:2,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'015077',provname:'Caregivers Of Pleasant Grove Inc',address:'521 Park Ave',city:'Pleasant Grove',state:'AL',zip:'35127',phone:'(205) 744-2181',bedcert:64,stars:3,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'015048',provname:'Roanoke Health Care Center LLC',address:'400 Roanoke Cir',city:'Roanoke',state:'AL',zip:'36274',phone:'(334) 863-4196',bedcert:65,stars:4,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'015083',provname:'Hanover Health And Rehabilitation Birmingham',address:'3800 Montclair Rd',city:'Birmingham',state:'AL',zip:'35213',phone:'(205) 595-1871',bedcert:66,stars:3,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'015027',provname:'Brown Nursing Home',address:'200 James D Harrison Dr',city:'Alexander City',state:'AL',zip:'35010',phone:'(256) 329-8900',bedcert:68,stars:3,ownership:'For profit - Individual',certified:'Medicare and Medicaid'},
-  {provnum:'015055',provname:'Lighthouse Rehabilitation And Healthcare',address:'1015 Medical Center Pkwy',city:'Selma',state:'AL',zip:'36701',phone:'(334) 875-3111',bedcert:68,stars:2,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'015089',provname:'Moundville Health And Rehabilitation LLC',address:'100 Health Dr',city:'Moundville',state:'AL',zip:'35474',phone:'(205) 371-2331',bedcert:68,stars:3,ownership:'For profit - LLC',certified:'Medicare and Medicaid'},
-  {provnum:'015035',provname:'Citronelle Convalescent Center',address:'19100 Hwy 45',city:'Citronelle',state:'AL',zip:'36522',phone:'(251) 866-9901',bedcert:69,stars:2,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'015093',provname:'Lafayette Extended Care',address:'303 Medical Dr',city:'Lafayette',state:'AL',zip:'36862',phone:'(334) 864-7321',bedcert:69,stars:3,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'015031',provname:'Terrace Oaks Care And Rehabilitation',address:'1009 Sixth Ave N',city:'Bessemer',state:'AL',zip:'35020',phone:'(205) 425-4740',bedcert:69,stars:1,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'015050',provname:'Perry County Nursing Home',address:'300 Pickens St',city:'Marion',state:'AL',zip:'36756',phone:'(334) 683-6548',bedcert:71,stars:4,ownership:'Government - County',certified:'Medicare and Medicaid'},
-  {provnum:'015064',provname:'Southern Care LLC',address:'300 Hwy 43',city:'Guin',state:'AL',zip:'35563',phone:'(205) 468-3370',bedcert:71,stars:3,ownership:'For profit - LLC',certified:'Medicare and Medicaid'},
-  {provnum:'015078',provname:'Goodwater Healthcare Center',address:'400 Goodwater Ave',city:'Goodwater',state:'AL',zip:'35072',phone:'(256) 839-6363',bedcert:72,stars:2,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'015019',provname:'Greene County Nursing Home',address:'509 Wilson Ave',city:'Eutaw',state:'AL',zip:'35462',phone:'(205) 372-3338',bedcert:72,stars:1,ownership:'Government - County',certified:'Medicaid only'},
-  {provnum:'015042',provname:'Orchard Healthcare Center',address:'109 Orchard Dr',city:'Hayneville',state:'AL',zip:'36040',phone:'(334) 548-2521',bedcert:72,stars:2,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'015062',provname:'Parkwood Health Care Facility',address:'2101 Stadium Dr',city:'Phenix City',state:'AL',zip:'36867',phone:'(334) 298-6543',bedcert:74,stars:3,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
   {provnum:'105001',provname:'Phoenix Rehabilitation Center',address:'1234 Desert Way',city:'Phoenix',state:'AZ',zip:'85001',phone:'(602) 555-0101',bedcert:120,stars:4,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'105002',provname:'Scottsdale Senior Care',address:'5678 Camelback Rd',city:'Scottsdale',state:'AZ',zip:'85251',phone:'(480) 555-0102',bedcert:88,stars:3,ownership:'Non profit - Corporation',certified:'Medicare and Medicaid'},
   {provnum:'055001',provname:'Golden Gate Care Center',address:'100 Market St',city:'San Francisco',state:'CA',zip:'94105',phone:'(415) 555-0201',bedcert:180,stars:5,ownership:'Non profit - Corporation',certified:'Medicare and Medicaid'},
   {provnum:'055002',provname:'Sunset Hills Nursing',address:'2000 Sunset Blvd',city:'Los Angeles',state:'CA',zip:'90028',phone:'(213) 555-0202',bedcert:99,stars:2,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
   {provnum:'065001',provname:'Rocky Mountain Care',address:'1 Mountain View Dr',city:'Denver',state:'CO',zip:'80201',phone:'(303) 555-0301',bedcert:110,stars:3,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
   {provnum:'125001',provname:'Sunshine Rehabilitation Center',address:'100 Sunshine Blvd',city:'Miami',state:'FL',zip:'33101',phone:'(305) 555-0401',bedcert:220,stars:4,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'125002',provname:'Orlando Health And Rehab',address:'500 Orange Ave',city:'Orlando',state:'FL',zip:'32801',phone:'(407) 555-0402',bedcert:160,stars:3,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
   {provnum:'125003',provname:'Tampa Bay Senior Living',address:'200 Bayshore Blvd',city:'Tampa',state:'FL',zip:'33606',phone:'(813) 555-0403',bedcert:95,stars:5,ownership:'Non profit - Corporation',certified:'Medicare and Medicaid'},
   {provnum:'115001',provname:'Peachtree Nursing Center',address:'1 Peachtree St',city:'Atlanta',state:'GA',zip:'30301',phone:'(404) 555-0501',bedcert:130,stars:3,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
   {provnum:'145001',provname:'Prairie Winds Care Center',address:'1000 Prairie Ave',city:'Chicago',state:'IL',zip:'60601',phone:'(312) 555-0601',bedcert:200,stars:4,ownership:'Non profit - Church related',certified:'Medicare and Medicaid'},
   {provnum:'225001',provname:'Harbor View Care Center',address:'1 Harbor Dr',city:'Boston',state:'MA',zip:'02101',phone:'(617) 555-0801',bedcert:168,stars:5,ownership:'Non profit - Corporation',certified:'Medicare and Medicaid'},
   {provnum:'235001',provname:'Motor City Rehabilitation',address:'500 Woodward Ave',city:'Detroit',state:'MI',zip:'48201',phone:'(313) 555-0901',bedcert:142,stars:3,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
   {provnum:'355001',provname:'Empire State Care Center',address:'1 Fifth Ave',city:'New York',state:'NY',zip:'10001',phone:'(212) 555-1401',bedcert:300,stars:3,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
+  {provnum:'375001',provname:'Buckeye Care Center',address:'1 Broad St',city:'Columbus',state:'OH',zip:'43215',phone:'(614) 555-1501',bedcert:155,stars:4,ownership:'Non profit - Corporation',certified:'Medicare and Medicaid'},
+  {provnum:'425001',provname:'Keystone Rehabilitation Center',address:'1 Liberty Ave',city:'Pittsburgh',state:'PA',zip:'15222',phone:'(412) 555-1601',bedcert:178,stars:5,ownership:'Non profit - Corporation',certified:'Medicare and Medicaid'},
   {provnum:'455001',provname:'Lone Star Nursing Center',address:'1 Congress Ave',city:'Austin',state:'TX',zip:'78701',phone:'(512) 555-1701',bedcert:192,stars:3,ownership:'For profit - Corporation',certified:'Medicare and Medicaid'},
   {provnum:'455002',provname:'Houston Medical Center SNF',address:'6700 Bertner Ave',city:'Houston',state:'TX',zip:'77030',phone:'(713) 555-1702',bedcert:240,stars:4,ownership:'Non profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'535001',provname:'Emerald City Care Center',address:'1 Pike Place',city:'Seattle',state:'WA',zip:'98101',phone:'(206) 555-1801',bedcert:133,stars:4,ownership:'Non profit - Corporation',certified:'Medicare and Medicaid'},
-  {provnum:'425001',provname:'Keystone Rehabilitation Center',address:'1 Liberty Ave',city:'Pittsburgh',state:'PA',zip:'15222',phone:'(412) 555-1601',bedcert:178,stars:5,ownership:'Non profit - Corporation',certified:'Medicare and Medicaid'}
+  {provnum:'535001',provname:'Emerald City Care Center',address:'1 Pike Place',city:'Seattle',state:'WA',zip:'98101',phone:'(206) 555-1801',bedcert:133,stars:4,ownership:'Non profit - Corporation',certified:'Medicare and Medicaid'}
 ];
 
-/* ── LIVE API ── */
-var PROXIES = ['https://corsproxy.io/?','https://api.allorigins.win/raw?url='];
-var CMS_EP = 'https://data.cms.gov/resource/4pq5-n9py.json?%24limit=2000';
-
-function doLiveAPI() {
-  document.getElementById('apiStatus').textContent = 'Connecting...';
-  showProg();
-  tryPx(0);
-}
-
-function tryPx(i) {
-  if (i >= PROXIES.length) {
-    document.getElementById('apiStatus').textContent = 'Failed - use Method 2 or 3';
-    setBanner('error', 'Live API unavailable. Use Method 2 (CSV upload) or Method 3 (Demo).');
-    return;
-  }
-  var url = PROXIES[i] + encodeURIComponent(CMS_EP);
-  setP(20 + i * 20, 'Trying proxy ' + (i + 1) + '...');
-  addLog('Proxy ' + (i + 1) + ': ' + PROXIES[i]);
-  fetch(url, {signal: AbortSignal.timeout(9000)})
-    .then(function(r) {
-      if (!r.ok) { throw new Error('HTTP ' + r.status); }
-      return r.json();
-    })
-    .then(function(d) {
-      if (!Array.isArray(d) || !d.length) { throw new Error('Empty response'); }
-      addLog('Got ' + d.length + ' records');
-      document.getElementById('apiStatus').textContent = 'Connected!';
-      closeFetch();
-      var recs = [];
-      for (var x = 0; x < d.length; x++) {
-        var r = d[x];
-        recs.push(norm({
-          provnum: r.provnum || r.federal_provider_number || '',
-          provname: r.provname || r.provider_name || '',
-          address: r.address || r.provaddr || '',
-          city: r.city || '',
-          state: r.state || '',
-          zip: r.zip || r.provzip || '',
-          phone: r.phone || '',
-          bedcert: r.bedcert || '',
-          stars: r.overall_rating || '',
-          ownership: r.ownership_type || '',
-          certified: r.certification || ''
-        }));
-      }
-      finish(recs, 'CMS Live API');
-    })
-    .catch(function(e) {
-      addLog('Failed: ' + e.message);
-      tryPx(i + 1);
-    });
-}
-
-/* ── CSV UPLOAD ── */
-function handleCSV(e) {
-  var f = e.target.files[0];
-  if (!f) { return; }
-  document.getElementById('dropZone').innerHTML =
-    '<div style="color:#16a34a;font-size:1.4rem;">&#10003;</div>' +
-    '<div style="font-weight:700;color:#16a34a;font-size:0.78rem;">' + f.name + '</div>' +
-    '<div style="font-size:0.65rem;color:#64748b;">Reading file...</div>';
-  var rd = new FileReader();
-  rd.onload = function(ev) {
-    closeFetch();
-    showProg();
-    setP(20, 'Parsing ' + Math.round(f.size / 1024) + ' KB...');
-    addLog('File: ' + f.name);
-    setTimeout(function() { parseCSV(ev.target.result); }, 80);
-  };
-  rd.readAsText(f);
-}
-
-function parseCSV(txt) {
-  setP(40, 'Splitting rows...');
-
-  /* KEY FIX: avoid regex with newlines — use string replace instead */
-  txt = txt.split('\r').join('');
-  var lines = txt.split('\n');
-
-  var hdrs = csvR(lines[0]);
-  for (var h = 0; h < hdrs.length; h++) {
-    hdrs[h] = hdrs[h].toLowerCase().split('"').join('').trim();
-  }
-  addLog('Columns: ' + hdrs.length + ' | Rows: ' + (lines.length - 1));
-
-  function gc(row, names) {
-    for (var n = 0; n < names.length; n++) {
-      var idx = hdrs.indexOf(names[n]);
-      if (idx >= 0 && row[idx] !== undefined) {
-        return (row[idx] || '').split('"').join('').trim();
-      }
-    }
-    return '';
-  }
-
-  setP(55, 'Building records...');
-  var recs = [];
-  for (var i = 1; i < lines.length; i++) {
-    if (!lines[i].trim()) { continue; }
-    var row = csvR(lines[i]);
-    recs.push(norm({
-      provnum:   gc(row, ['provnum','federal provider number','cms certification number','ccn']),
-      provname:  gc(row, ['provname','provider name','facility name','name']),
-      address:   gc(row, ['address','provaddr','provider address','street address']),
-      city:      gc(row, ['city','provcity','provider city']),
-      state:     gc(row, ['state','provstate','provider state']),
-      zip:       gc(row, ['zip','provzip','provider zip code','zip code']),
-      phone:     gc(row, ['phone','provphone','telephone number','phone number']),
-      bedcert:   gc(row, ['bedcert','number of certified beds','certified beds','beds']),
-      stars:     gc(row, ['overall_rating','overall rating','overall star rating','overall_rat']),
-      ownership: gc(row, ['ownership_type','ownership type','type of ownership']),
-      certified: gc(row, ['certification','certcat','provider type','certification type'])
-    }));
-  }
-  addLog('Parsed: ' + recs.length + ' records');
-  finish(recs, 'Uploaded CSV (' + recs.length + ' records)');
-}
-
-function csvR(line) {
-  var result = [];
-  var cur = '';
-  var inQ = false;
-  for (var i = 0; i < line.length; i++) {
-    var ch = line[i];
-    if (ch === '"') {
-      inQ = !inQ;
-    } else if (ch === ',' && !inQ) {
-      result.push(cur);
-      cur = '';
-    } else {
-      cur += ch;
-    }
-  }
-  result.push(cur);
-  return result;
-}
-
-/* ── DEMO MODE ── */
 function loadDemo() {
-  closeFetch();
+  ALL = DEMO.map(function(r){ return norm(r); });
+  ALL.forEach(function(r){ if(!MANUAL[r.provnum]) MANUAL[r.provnum]={email:'',website:'',notes:''}; });
   showProg();
-  setP(30, 'Loading demo data...');
-  addLog('Demo mode');
-  var recs = [];
-  for (var i = 0; i < DEMO.length; i++) {
-    recs.push(norm(DEMO[i]));
-  }
-  setTimeout(function() {
-    finish(recs, 'Demo Mode (50 sample facilities)');
-  }, 300);
-}
-
-/* ── NORMALISE ── */
-function norm(r) {
-  return {
-    provnum:   String(r.provnum || '').trim(),
-    provname:  tc(String(r.provname || '').trim()),
-    address:   tc(String(r.address || '').trim()),
-    city:      tc(String(r.city || '').trim()),
-    state:     String(r.state || '').toUpperCase().trim().substring(0, 2),
-    zip:       String(r.zip || '').trim().substring(0, 5),
-    phone:     fmtPhone(String(r.phone || '').trim()),
-    bedcert:   parseInt(r.bedcert) || 0,
-    stars:     parseInt(r.stars) || 0,
-    ownership: String(r.ownership || '').trim(),
-    certified: String(r.certified || '').trim()
-  };
-}
-
-/* ── FINISH LOAD ── */
-function finish(recs, src) {
-  setP(80, 'Rendering...');
-  ALL = [];
-  for (var i = 0; i < recs.length; i++) {
-    if (recs[i].provname) { ALL.push(recs[i]); }
-  }
-  for (var j = 0; j < ALL.length; j++) {
-    if (!MANUAL[ALL[j].provnum]) {
-      MANUAL[ALL[j].provnum] = {email: '', website: '', notes: ''};
-    }
-  }
-  addLog('Total: ' + ALL.length);
+  setP(100,'Demo loaded','20 sample facilities');
+  document.getElementById('progFill').style.background='#7c3aed';
+  document.getElementById('progTitle').textContent='&#128301; Demo Mode Active';
+  document.getElementById('apiStatusCard').style.display='flex';
+  setApiStatus('live','Demo mode &mdash; 20 sample facilities across 10 states','Click "Load National CMS Data" for real data');
   buildStateDD();
   doFilter();
-  setP(100, 'Done! ' + ALL.length + ' facilities loaded.');
-  document.getElementById('progFill').style.background = '#22c55e';
-  setBanner('success',
-    '&#10003; <b>' + ALL.length + ' facilities</b> loaded from <b>' + src + '</b>. ' +
-    'Use filters to drill down. Click any facility name for full detail. ' +
-    '<span style="background:#dcfce7;padding:1px 5px;border-radius:3px;">Green</span> = CMS data present, ' +
-    '<span style="background:#fee2e2;padding:1px 5px;border-radius:3px;">Red</span> = missing from CMS.'
-  );
+  setBanner('warn','&#128301; <b>Demo mode</b> &mdash; showing 20 sample facilities. Click <b>Load National CMS Data</b> to fetch all ~15,000 real facilities from CMS.');
   ping();
 }
 
-/* ── FILTER ── */
+// ── NORMALISE ──────────────────────────────────────────────────
+function norm(r) {
+  var stars = parseInt(r.overall_rating || r.stars) || 0;
+  return {
+    provnum:   String(r.provnum||'').trim(),
+    provname:  tc(String(r.provname||'').trim()),
+    address:   tc(String(r.address||'').trim()),
+    city:      tc(String(r.city||'').trim()),
+    state:     String(r.state||'').toUpperCase().trim().substring(0,2),
+    zip:       String(r.zip||'').trim().substring(0,5),
+    phone:     fmtPhone(String(r.phone||'').trim()),
+    bedcert:   parseInt(r.bedcert)||0,
+    stars:     stars,
+    ownership: String(r.ownership_type||r.ownership||'').trim(),
+    certified: String(r.certification||r.certified||'').trim()
+  };
+}
+
+// ── FILTER ────────────────────────────────────────────────────
 function doFilter() {
-  var q  = document.getElementById('f-q').value.toLowerCase().trim();
+  var q  = (document.getElementById('f-q').value||'').toLowerCase().trim();
   var st = document.getElementById('f-st').value;
   var bd = document.getElementById('f-bd').value;
-  var sr = parseInt(document.getElementById('f-sr').value) || 0;
+  var sr = parseInt(document.getElementById('f-sr').value)||0;
   var ow = document.getElementById('f-ow').value;
   var ce = document.getElementById('f-ce').value;
 
-  FILT = [];
-  for (var i = 0; i < ALL.length; i++) {
-    var r = ALL[i];
-    if (q && r.provname.toLowerCase().indexOf(q) < 0 &&
-        r.city.toLowerCase().indexOf(q) < 0 &&
-        r.zip.indexOf(q) < 0 &&
-        r.state.toLowerCase().indexOf(q) < 0) { continue; }
-    if (st && r.state !== st) { continue; }
+  FILT = ALL.filter(function(r) {
+    if (q) {
+      var hay = r.provname.toLowerCase() + ' ' + r.city.toLowerCase() + ' ' + r.zip + ' ' + r.state.toLowerCase();
+      if (hay.indexOf(q) < 0) return false;
+    }
+    if (st && r.state !== st) return false;
     if (bd) {
       var p = bd.split('-');
-      if (r.bedcert < parseInt(p[0]) || r.bedcert > parseInt(p[1])) { continue; }
+      if (r.bedcert < parseInt(p[0]) || r.bedcert > parseInt(p[1])) return false;
     }
-    if (sr && r.stars < sr) { continue; }
+    if (sr && r.stars < sr) return false;
     if (ow) {
       var ol = r.ownership.toLowerCase();
-      if (ow === 'profit' && ol.indexOf('for profit') < 0) { continue; }
-      if (ow === 'nonprofit' && ol.indexOf('non profit') < 0 && ol.indexOf('nonprofit') < 0) { continue; }
-      if (ow === 'government' && ol.indexOf('government') < 0) { continue; }
+      if (ow==='profit' && ol.indexOf('for profit') < 0) return false;
+      if (ow==='nonprofit' && ol.indexOf('non profit') < 0 && ol.indexOf('nonprofit') < 0) return false;
+      if (ow==='government' && ol.indexOf('government') < 0) return false;
     }
     if (ce) {
       var cl = r.certified.toLowerCase();
-      if (ce === 'medicare' && cl.indexOf('medicare') < 0) { continue; }
-      if (ce === 'medicaid' && cl.indexOf('medicaid') < 0) { continue; }
-      if (ce === 'both' && !(cl.indexOf('medicare') >= 0 && cl.indexOf('medicaid') >= 0)) { continue; }
+      if (ce==='medicare' && cl.indexOf('medicare') < 0) return false;
+      if (ce==='medicaid' && cl.indexOf('medicaid') < 0) return false;
+      if (ce==='both' && !(cl.indexOf('medicare') >= 0 && cl.indexOf('medicaid') >= 0)) return false;
     }
-    FILT.push(r);
-  }
+    return true;
+  });
 
-  FILT.sort(function(a, b) {
-    var av = a[SKEY];
-    var bv = b[SKEY];
-    if (typeof av === 'number') { return (av - bv) * SDIR; }
-    return String(av || '').localeCompare(String(bv || '')) * SDIR;
+  FILT.sort(function(a,b) {
+    var av=a[SKEY], bv=b[SKEY];
+    if (typeof av==='number') return (av-bv)*SDIR;
+    return String(av||'').localeCompare(String(bv||''))*SDIR;
   });
 
   renderTbl();
@@ -627,20 +692,16 @@ function doFilter() {
 }
 
 function clearFilters() {
-  var ids = ['f-q','f-st','f-bd','f-sr','f-ow','f-ce'];
-  for (var i = 0; i < ids.length; i++) {
-    document.getElementById(ids[i]).value = '';
-  }
+  ['f-q','f-st','f-bd','f-sr','f-ow','f-ce'].forEach(function(id){ document.getElementById(id).value=''; });
   doFilter();
 }
 
-/* ── SORT ── */
 function doSort(k) {
-  if (SKEY === k) { SDIR *= -1; } else { SKEY = k; SDIR = 1; }
+  if(SKEY===k) SDIR*=-1; else{SKEY=k;SDIR=1;}
   doFilter();
 }
 
-/* ── RENDER TABLE ── */
+// ── RENDER TABLE ──────────────────────────────────────────────
 function renderTbl() {
   var tbody = document.getElementById('tblBody');
   var tw    = document.getElementById('tblWrap');
@@ -649,39 +710,29 @@ function renderTbl() {
   var lr    = document.getElementById('legendRow');
 
   if (ALL.length === 0) {
-    tw.style.display = 'none';
-    nr.style.display = 'none';
-    lr.style.display = 'none';
-    nd.style.display = 'block';
-    nd.innerHTML = 'Click <b>Load CMS Data</b> to get started, or wait for demo to load.';
+    tw.style.display='none'; nr.style.display='none'; lr.style.display='none';
+    nd.style.display='block';
     return;
   }
-  nd.style.display = 'none';
-
+  nd.style.display='none';
   if (FILT.length === 0) {
-    tw.style.display = 'none';
-    nr.style.display = 'block';
-    lr.style.display = 'none';
-    tbody.innerHTML = '';
+    tw.style.display='none'; nr.style.display='block'; lr.style.display='none';
+    tbody.innerHTML='';
     return;
   }
+  nr.style.display='none'; tw.style.display='block'; lr.style.display='flex';
 
-  nr.style.display = 'none';
-  tw.style.display = 'block';
-  lr.style.display = 'flex';
-
-  var rows = [];
-  for (var i = 0; i < FILT.length; i++) {
+  var rows = '';
+  var limit = Math.min(FILT.length, 500); // cap render at 500 rows for performance
+  for (var i = 0; i < limit; i++) {
     var r = FILT[i];
-    var m = MANUAL[r.provnum] || {email:'',website:'',notes:''};
-    var pnEsc = escA(r.provnum);
-    var pnJ   = escJ(r.provnum);
-    rows.push(
+    var m = MANUAL[r.provnum]||{email:'',website:'',notes:''};
+    rows +=
       '<tr>' +
       '<td style="font-family:monospace;font-size:0.6rem;color:#94a3b8;">' + esc(r.provnum) + '</td>' +
-      '<td style="font-weight:700;color:#1d4ed8;cursor:pointer;white-space:nowrap;max-width:200px;overflow:hidden;text-overflow:ellipsis;" onclick="openDet(\'' + pnJ + '\')">' + esc(r.provname) + '</td>' +
+      '<td style="font-weight:700;color:#1d4ed8;cursor:pointer;white-space:nowrap;max-width:220px;overflow:hidden;text-overflow:ellipsis;" onclick="openDet(\'' + escJ(r.provnum) + '\')">' + esc(r.provname) + '</td>' +
       '<td style="white-space:nowrap;">' + esc(r.city) + '</td>' +
-      '<td style="text-align:center;"><span class="bdg bdg-b">' + esc(r.state) + '</span></td>' +
+      '<td style="text-align:center;"><span class="bdg bdg-b">' + r.state + '</span></td>' +
       '<td>' + esc(r.zip) + '</td>' +
       '<td style="text-align:center;">' + bBadge(r.bedcert) + '</td>' +
       '<td>' + cCell(r.phone) + '</td>' +
@@ -689,276 +740,214 @@ function renderTbl() {
       '<td style="text-align:center;white-space:nowrap;">' + starH(r.stars) + '</td>' +
       '<td>' + cCell(r.ownership) + '</td>' +
       '<td>' + cCell(r.certified) + '</td>' +
-      '<td><div class="ce" contenteditable="true" data-ph="email..." data-id="' + pnEsc + '" data-f="email" oninput="savM(this)">' + esc(m.email) + '</div></td>' +
-      '<td><div class="ce" contenteditable="true" data-ph="www..." data-id="' + pnEsc + '" data-f="website" oninput="savM(this)">' + esc(m.website) + '</div></td>' +
-      '<td><div class="ce" contenteditable="true" data-ph="Notes..." data-id="' + pnEsc + '" data-f="notes" oninput="savM(this)">' + esc(m.notes) + '</div></td>' +
-      '</tr>'
-    );
+      '<td><div class="ce" contenteditable="true" data-ph="email..." data-id="' + escA(r.provnum) + '" data-f="email" oninput="savM(this)">' + esc(m.email) + '</div></td>' +
+      '<td><div class="ce" contenteditable="true" data-ph="www..." data-id="' + escA(r.provnum) + '" data-f="website" oninput="savM(this)">' + esc(m.website) + '</div></td>' +
+      '<td><div class="ce" contenteditable="true" data-ph="Notes..." data-id="' + escA(r.provnum) + '" data-f="notes" oninput="savM(this)">' + esc(m.notes) + '</div></td>' +
+      '</tr>';
   }
-  tbody.innerHTML = rows.join('');
+
+  if (FILT.length > 500) {
+    rows += '<tr><td colspan="14" style="text-align:center;padding:12px;background:#fffde7;font-size:0.72rem;color:#854d0e;font-weight:700;">&#9888; Showing first 500 of ' + FILT.length.toLocaleString() + ' results. Use filters to narrow down.</td></tr>';
+  }
+
+  tbody.innerHTML = rows;
 }
 
 function savM(el) {
-  var id = el.getAttribute('data-id');
-  var f  = el.getAttribute('data-f');
-  if (!MANUAL[id]) { MANUAL[id] = {email:'',website:'',notes:''}; }
-  MANUAL[id][f] = el.innerText.trim();
+  var id=el.getAttribute('data-id'), f=el.getAttribute('data-f');
+  if(!MANUAL[id]) MANUAL[id]={email:'',website:'',notes:''};
+  MANUAL[id][f]=el.innerText.trim();
 }
 
-/* ── DETAIL MODAL ── */
+// ── DETAIL MODAL ──────────────────────────────────────────────
 function openDet(pn) {
-  var r = null;
-  for (var i = 0; i < ALL.length; i++) {
-    if (ALL[i].provnum === pn) { r = ALL[i]; break; }
-  }
-  if (!r) { return; }
-  var m = MANUAL[pn] || {};
+  var r = ALL.find(function(x){ return x.provnum===pn; });
+  if (!r) return;
+  var m = MANUAL[pn]||{};
   document.getElementById('detTitle').textContent = r.provname;
-
-  var flds = [
-    ['State', r.state],
-    ['City', r.city],
-    ['ZIP', r.zip || '<span style="color:#ef4444;">Missing</span>'],
-    ['Address', r.address || '<span style="color:#ef4444;">Missing</span>'],
-    ['Phone', r.phone || '<span style="color:#ef4444;">Missing</span>'],
-    ['Certified Beds', r.bedcert || '&#8212;'],
-    ['Star Rating', r.stars ? (starH(r.stars) + ' (' + r.stars + '/5)') : '<span style="color:#ef4444;">Missing</span>'],
-    ['Ownership', r.ownership || '<span style="color:#ef4444;">Missing</span>'],
-    ['Certification', r.certified || '<span style="color:#ef4444;">Missing</span>'],
-    ['CMS Provider ID', r.provnum || '&#8212;'],
-    ['Email', m.email || '<span style="color:#d1d5db;font-style:italic;">Not entered</span>'],
-    ['Website', m.website || '<span style="color:#d1d5db;font-style:italic;">Not entered</span>'],
-    ['Notes', m.notes || '<span style="color:#d1d5db;font-style:italic;">None</span>']
+  var flds=[
+    ['State',r.state],['City',r.city],
+    ['ZIP',r.zip||'<span style="color:#ef4444;">Not in CMS</span>'],
+    ['Address',r.address||'<span style="color:#ef4444;">Not in CMS</span>'],
+    ['Phone',r.phone||'<span style="color:#ef4444;">Not in CMS</span>'],
+    ['Certified Beds',r.bedcert||'—'],
+    ['Star Rating',r.stars?(starH(r.stars)+' ('+r.stars+'/5)'):'<span style="color:#ef4444;">Not in CMS</span>'],
+    ['Ownership',r.ownership||'<span style="color:#ef4444;">Not in CMS</span>'],
+    ['Certification',r.certified||'<span style="color:#ef4444;">Not in CMS</span>'],
+    ['CMS Provider ID',r.provnum||'—'],
+    ['Email',m.email||'<span style="color:#d1d5db;font-style:italic;">Not entered</span>'],
+    ['Website',m.website||'<span style="color:#d1d5db;font-style:italic;">Not entered</span>'],
+    ['Notes',m.notes||'<span style="color:#d1d5db;font-style:italic;">None</span>']
   ];
-
-  var h = '';
-  for (var j = 0; j < flds.length; j++) {
-    h += '<div class="mf"><div class="mf-l">' + flds[j][0] + '</div><div class="mf-v">' + flds[j][1] + '</div></div>';
-  }
-  document.getElementById('detBody').innerHTML = h;
-
-  var lw = document.getElementById('detLink');
-  if (r.provnum) {
-    lw.innerHTML = '<a href="https://www.medicare.gov/care-compare/details/nursing-home/' + r.provnum + '" target="_blank" class="btn btn-green" style="text-decoration:none;font-size:0.68rem;">Medicare.gov &#8599;</a>';
-  } else {
-    lw.innerHTML = '';
-  }
-  document.getElementById('detModal').style.display = 'flex';
+  var h='';
+  flds.forEach(function(f){ h+='<div class="mf"><div class="mf-l">'+f[0]+'</div><div class="mf-v">'+f[1]+'</div></div>'; });
+  document.getElementById('detBody').innerHTML=h;
+  var lw=document.getElementById('detLink');
+  lw.innerHTML=r.provnum?'<a href="https://www.medicare.gov/care-compare/details/nursing-home/'+r.provnum+'" target="_blank" class="btn btn-green" style="text-decoration:none;font-size:0.68rem;">View on Medicare.gov &#8599;</a>':'';
+  document.getElementById('detModal').style.display='flex';
 }
+function closeDet(){ document.getElementById('detModal').style.display='none'; }
 
-function closeDet() { document.getElementById('detModal').style.display = 'none'; }
-
-/* ── STATS ── */
+// ── STATS ─────────────────────────────────────────────────────
 function updStats() {
-  var n = FILT.length;
-  var sts = [];
-  var totBeds = 0;
-  var totStars = 0;
-  var starCount = 0;
-  var filled = 0;
-  var fldKeys = ['phone','address','zip','stars','ownership','certified'];
-
-  for (var i = 0; i < FILT.length; i++) {
-    var r = FILT[i];
-    if (sts.indexOf(r.state) < 0) { sts.push(r.state); }
-    totBeds += r.bedcert;
-    if (r.stars > 0) { totStars += r.stars; starCount++; }
-    for (var f = 0; f < fldKeys.length; f++) {
-      if (r[fldKeys[f]] && r[fldKeys[f]] !== 0) { filled++; }
-    }
-  }
-
-  var ab = n ? Math.round(totBeds / n) : 0;
-  var as = starCount ? (totStars / starCount).toFixed(1) : '&#8212;';
-  var possible = n * fldKeys.length;
-  var pct = possible ? Math.round(filled / possible * 100) + '%' : '&#8212;';
-
-  document.getElementById('s-total').textContent = ALL.length;
-  document.getElementById('s-show').textContent = n;
-  document.getElementById('s-states').textContent = sts.length;
-  document.getElementById('s-beds').innerHTML = ab || '&#8212;';
-  document.getElementById('s-stars').innerHTML = as;
-  document.getElementById('s-comp').innerHTML = pct;
+  var n=FILT.length;
+  var stateSet={};
+  FILT.forEach(function(r){stateSet[r.state]=1;});
+  var sc=Object.keys(stateSet).length;
+  var ab=n?Math.round(FILT.reduce(function(s,r){return s+r.bedcert;},0)/n):0;
+  var ws=FILT.filter(function(r){return r.stars>0;});
+  var as=ws.length?(ws.reduce(function(s,r){return s+r.stars;},0)/ws.length).toFixed(1):'—';
+  var flds=['phone','address','zip','stars','ownership','certified'];
+  var fil=0, pos=n*flds.length;
+  FILT.forEach(function(r){flds.forEach(function(f){if(r[f]&&r[f]!==0)fil++;});});
+  var pct=pos?Math.round(fil/pos*100)+'%':'—';
+  document.getElementById('s-total').textContent=ALL.length.toLocaleString();
+  document.getElementById('s-show').textContent=n.toLocaleString();
+  document.getElementById('s-states').textContent=sc;
+  document.getElementById('s-beds').textContent=ab||'—';
+  document.getElementById('s-stars').textContent=as;
+  document.getElementById('s-comp').textContent=pct;
 }
 
-/* ── COMPLETENESS ── */
+// ── COMPLETENESS ──────────────────────────────────────────────
 function updComp() {
-  var n = FILT.length;
-  if (!n) { document.getElementById('compPanel').style.display = 'none'; return; }
-  document.getElementById('compPanel').style.display = 'block';
-  document.getElementById('compSub').textContent = n + ' facilities in current view';
-
-  var flds = [
-    {k:'phone',    l:'&#128222; Phone Numbers'},
-    {k:'address',  l:'&#128205; Street Address'},
-    {k:'zip',      l:'&#128230; ZIP Code'},
-    {k:'stars',    l:'&#11088; Star Rating'},
-    {k:'ownership',l:'&#127970; Ownership Type'},
+  var n=FILT.length;
+  if(!n){document.getElementById('compPanel').style.display='none';return;}
+  document.getElementById('compPanel').style.display='block';
+  document.getElementById('compSub').textContent=n.toLocaleString()+' facilities in view';
+  var flds=[
+    {k:'phone',l:'&#128222; Phone'},
+    {k:'address',l:'&#128205; Address'},
+    {k:'zip',l:'&#128230; ZIP'},
+    {k:'stars',l:'&#11088; Star Rating'},
+    {k:'ownership',l:'&#127970; Ownership'},
     {k:'certified',l:'&#128220; Certification'},
-    {k:'provnum',  l:'&#128100; CMS Provider ID'}
+    {k:'provnum',l:'&#128100; CMS Provider ID'}
   ];
-
-  var h = '';
-  for (var i = 0; i < flds.length; i++) {
-    var f = flds[i];
-    var count = 0;
-    for (var j = 0; j < FILT.length; j++) {
-      if (FILT[j][f.k] && FILT[j][f.k] !== 0) { count++; }
-    }
-    var pct = n ? Math.round(count / n * 100) : 0;
-    var col = pct >= 80 ? '#22c55e' : (pct >= 50 ? '#eab308' : '#ef4444');
-    h += '<div class="comp-item">' +
-      '<div class="comp-lbl">' + f.l + '</div>' +
-      '<div class="comp-track"><div class="comp-fill" style="width:' + pct + '%;background:' + col + ';"></div></div>' +
-      '<div class="comp-meta">' + pct + '% complete &#8212; ' + (n - count) + ' missing</div>' +
-      '</div>';
-  }
-  document.getElementById('compGrid').innerHTML = h;
+  var h='';
+  flds.forEach(function(f){
+    var c=FILT.filter(function(r){return r[f.k]&&r[f.k]!==0;}).length;
+    var p=n?Math.round(c/n*100):0;
+    var col=p>=80?'#22c55e':p>=50?'#eab308':'#ef4444';
+    h+='<div class="comp-item"><div class="comp-lbl">'+f.l+'</div>'+
+       '<div class="comp-track"><div class="comp-fill" style="width:'+p+'%;background:'+col+';"></div></div>'+
+       '<div class="comp-meta">'+p+'% &mdash; '+(n-c)+' missing</div></div>';
+  });
+  document.getElementById('compGrid').innerHTML=h;
 }
 
-/* ── STATE DROPDOWN ── */
-var US_NAMES = {AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',CO:'Colorado',CT:'Connecticut',DE:'Delaware',FL:'Florida',GA:'Georgia',HI:'Hawaii',ID:'Idaho',IL:'Illinois',IN:'Indiana',IA:'Iowa',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',ME:'Maine',MD:'Maryland',MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',MS:'Mississippi',MO:'Missouri',MT:'Montana',NE:'Nebraska',NV:'Nevada',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NY:'New York',NC:'North Carolina',ND:'North Dakota',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming',DC:'Washington DC'};
+// ── STATE DROPDOWN ────────────────────────────────────────────
+var US={AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',CO:'Colorado',CT:'Connecticut',DE:'Delaware',FL:'Florida',GA:'Georgia',HI:'Hawaii',ID:'Idaho',IL:'Illinois',IN:'Indiana',IA:'Iowa',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',ME:'Maine',MD:'Maryland',MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',MS:'Mississippi',MO:'Missouri',MT:'Montana',NE:'Nebraska',NV:'Nevada',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NY:'New York',NC:'North Carolina',ND:'North Dakota',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming',DC:'Washington DC'};
 
 function buildStateDD() {
-  var sts = [];
-  for (var i = 0; i < ALL.length; i++) {
-    if (ALL[i].state && sts.indexOf(ALL[i].state) < 0) { sts.push(ALL[i].state); }
-  }
+  var sts=[];
+  ALL.forEach(function(r){if(r.state&&sts.indexOf(r.state)<0)sts.push(r.state);});
   sts.sort();
-  var sel = document.getElementById('f-st');
-  sel.innerHTML = '<option value="">All States (' + sts.length + ')</option>';
-  for (var j = 0; j < sts.length; j++) {
-    var s = sts[j];
-    var o = document.createElement('option');
-    o.value = s;
-    o.textContent = s + (US_NAMES[s] ? ' \u2014 ' + US_NAMES[s] : '');
+  var sel=document.getElementById('f-st');
+  sel.innerHTML='<option value="">All States ('+sts.length+')</option>';
+  sts.forEach(function(s){
+    var o=document.createElement('option');
+    o.value=s; o.textContent=s+(US[s]?' \u2014 '+US[s]:'');
     sel.appendChild(o);
-  }
+  });
 }
 
-/* ── EXPORT ── */
+// ── EXPORT ────────────────────────────────────────────────────
 function doExport() {
-  if (!FILT.length) { alert('No data to export. Please load CMS data first.'); return; }
-  var headers = ['CMS_ID','Facility_Name','Address','City','State','ZIP','Phone','Beds','Stars','Ownership','Certification','Email','Website','Notes'];
-  var rows = [headers.join(',')];
-  for (var i = 0; i < FILT.length; i++) {
-    var r = FILT[i];
-    var m = MANUAL[r.provnum] || {};
-    rows.push([
-      r.provnum,
-      '"' + r.provname + '"',
-      '"' + r.address + '"',
-      r.city, r.state, r.zip,
-      '"' + r.phone + '"',
-      r.bedcert, r.stars,
-      '"' + r.ownership + '"',
-      '"' + r.certified + '"',
-      '"' + (m.email || '') + '"',
-      '"' + (m.website || '') + '"',
-      '"' + (m.notes || '') + '"'
-    ].join(','));
-  }
-  var csv = rows.join('\r\n');
-  var blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
-  var url = URL.createObjectURL(blob);
-  var a = document.createElement('a');
-  a.href = url;
-  a.setAttribute('download', 'SNF_Research_' + new Date().toISOString().substring(0,10) + '.csv');
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  if(!FILT.length){alert('No data to export.');return;}
+  var h=['CMS_ID','Facility_Name','Address','City','State','ZIP','Phone','Beds','Stars','Ownership','Certification','Email','Website','Notes'];
+  var rows=FILT.map(function(r){
+    var m=MANUAL[r.provnum]||{};
+    return [r.provnum,'"'+r.provname+'"','"'+r.address+'"',r.city,r.state,r.zip,'"'+r.phone+'"',r.bedcert,r.stars,'"'+r.ownership+'"','"'+r.certified+'"','"'+(m.email||'')+'"','"'+(m.website||'')+'"','"'+(m.notes||'')+'"'].join(',');
+  });
+  var csv=[h.join(',')].concat(rows).join('\r
+');
+  var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url; a.setAttribute('download','SNF_CMS_'+new Date().toISOString().substring(0,10)+'.csv');
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
 }
 
-/* ── RESET ── */
+// ── RESET ─────────────────────────────────────────────────────
 function doReset() {
-  ALL = []; FILT = [];
+  if(LOADING) cancelLoad();
+  ALL=[]; FILT=[];
   clearFilters();
-  document.getElementById('tblWrap').style.display = 'none';
-  document.getElementById('compPanel').style.display = 'none';
-  document.getElementById('noData').style.display = 'block';
-  document.getElementById('noData').innerHTML = 'Click <b>Load CMS Data</b> to get started.';
-  document.getElementById('noResults').style.display = 'none';
-  document.getElementById('legendRow').style.display = 'none';
-  document.getElementById('progWrap').style.display = 'none';
-  document.getElementById('banner').style.display = 'none';
-  var sids = ['s-total','s-show','s-states','s-beds','s-stars','s-comp'];
-  for (var i = 0; i < sids.length; i++) { document.getElementById(sids[i]).textContent = '0'; }
+  document.getElementById('tblWrap').style.display='none';
+  document.getElementById('compPanel').style.display='none';
+  document.getElementById('noData').style.display='block';
+  document.getElementById('noResults').style.display='none';
+  document.getElementById('legendRow').style.display='none';
+  document.getElementById('progCard').style.display='none';
+  document.getElementById('apiStatusCard').style.display='none';
+  document.getElementById('banner').style.display='none';
+  document.getElementById('loadBtn').disabled=false;
+  ['s-total','s-show','s-states','s-beds','s-stars','s-comp'].forEach(function(id){document.getElementById(id).textContent='0';});
   ping();
 }
 
-/* ── MODAL HELPERS ── */
-function showFetchModal() { document.getElementById('fetchModal').style.display = 'flex'; }
-function closeFetch()     { document.getElementById('fetchModal').style.display = 'none'; }
+// ── PROGRESS / STATUS ─────────────────────────────────────────
+function showProg(){document.getElementById('progCard').style.display='block';}
 
-/* ── PROGRESS ── */
-function showProg() {
-  document.getElementById('progWrap').style.display = 'block';
-  document.getElementById('progLog').innerHTML = '';
+function setP(p,l,r){
+  document.getElementById('progFill').style.width=p+'%';
+  document.getElementById('progPct').textContent=p+'%';
+  document.getElementById('progLbl').textContent=l;
+  if(r!==undefined) document.getElementById('progRecs').textContent=r;
 }
-function setP(p, l) {
-  document.getElementById('progFill').style.width = p + '%';
-  document.getElementById('progPct').textContent = p + '%';
-  document.getElementById('progLbl').textContent = l;
-}
-function addLog(m) {
-  var d = document.createElement('div');
-  d.textContent = '> ' + m;
-  var log = document.getElementById('progLog');
+
+function addLog(m){
+  var d=document.createElement('div');
+  d.textContent='> '+m;
+  var log=document.getElementById('progLog');
   log.appendChild(d);
-  log.scrollTop = log.scrollHeight;
+  log.scrollTop=log.scrollHeight;
 }
 
-/* ── BANNER ── */
-function setBanner(t, m) {
-  var b = document.getElementById('banner');
-  b.style.display = 'block';
-  b.className = 'banner banner-' + t;
-  b.innerHTML = m;
+function setApiStatus(state,text,sub){
+  var dot=document.getElementById('apiDot');
+  dot.className='api-dot';
+  if(state==='loading') dot.className+=' api-dot-loading';
+  else if(state==='live') dot.className+=' api-dot-live';
+  else if(state==='error') dot.className+=' api-dot-error';
+  else dot.className+=' api-dot-idle';
+  document.getElementById('apiStatusText').innerHTML=text;
+  document.getElementById('apiStatusSub').innerHTML=sub||'';
 }
 
-/* ── HELPERS ── */
-function bBadge(b) {
-  if (!b || b === 0) { return '<span class="bdg" style="background:#f1f5f9;color:#94a3b8;">&#8212;</span>'; }
-  if (b < 50)  { return '<span class="bdg bdg-s">' + b + '</span>'; }
-  if (b < 100) { return '<span class="bdg bdg-m">' + b + '</span>'; }
-  if (b < 150) { return '<span class="bdg bdg-l">' + b + '</span>'; }
-  return '<span class="bdg bdg-xl">' + b + '</span>';
+function setBanner(t,m){
+  var b=document.getElementById('banner');
+  b.style.display='block';
+  b.className='banner banner-'+t;
+  b.innerHTML=m;
 }
-function starH(n) {
-  if (!n || n === 0) { return '<span style="color:#e2e8f0;">&#8212;</span>'; }
-  var s = '';
-  for (var i = 0; i < n; i++) { s += '<span class="star">&#9733;</span>'; }
-  for (var j = n; j < 5; j++) { s += '<span style="color:#e2e8f0;">&#9733;</span>'; }
+
+// ── HELPERS ───────────────────────────────────────────────────
+function bBadge(b){
+  if(!b||b===0) return '<span class="bdg" style="background:#f1f5f9;color:#94a3b8;">&#8212;</span>';
+  if(b<50)  return '<span class="bdg bdg-s">'+b+'</span>';
+  if(b<100) return '<span class="bdg bdg-m">'+b+'</span>';
+  if(b<150) return '<span class="bdg bdg-l">'+b+'</span>';
+  return '<span class="bdg bdg-xl">'+b+'</span>';
+}
+function starH(n){
+  if(!n||n===0) return '<span style="color:#e2e8f0;font-size:0.75rem;">&#8212;</span>';
+  var s='';
+  for(var i=0;i<n;i++) s+='<span class="star" style="font-size:0.75rem;">&#9733;</span>';
+  for(var j=n;j<5;j++) s+='<span style="color:#e2e8f0;font-size:0.75rem;">&#9733;</span>';
   return s;
 }
-function cCell(v) {
-  if (v && v !== '' && v !== '0') { return '<span class="cf">' + esc(v) + '</span>'; }
+function cCell(v){
+  if(v&&v!==''&&v!=='0') return '<span class="cf">'+esc(v)+'</span>';
   return '<span class="cm">Missing</span>';
 }
-function tc(s) {
-  return s.replace(/\w\S*/g, function(w) {
-    return w.charAt(0).toUpperCase() + w.substr(1).toLowerCase();
-  });
-}
-function fmtPhone(p) {
-  var d = p.replace(/\D/g, '');
-  return d.length === 10 ? '(' + d.substring(0,3) + ') ' + d.substring(3,6) + '-' + d.substring(6) : p;
-}
-function esc(s) {
-  return String(s || '')
-    .split('&').join('&amp;')
-    .split('<').join('&lt;')
-    .split('>').join('&gt;')
-    .split('"').join('&quot;');
-}
-function escA(s) { return String(s || '').split("'").join('&#39;').split('"').join('&quot;'); }
-function escJ(s) { return String(s || '').split('\\').join('\\\\').split("'").join("\\'"); }
-
-/* ── AUTO-LOAD DEMO ON STARTUP ── */
-window.addEventListener('DOMContentLoaded', function() {
-  setTimeout(function() { loadDemo(); }, 500);
-});
+function tc(s){ return s.replace(/\w\S*/g,function(w){return w.charAt(0).toUpperCase()+w.substr(1).toLowerCase();}); }
+function fmtPhone(p){ var d=p.replace(/\D/g,''); return d.length===10?'('+d.substring(0,3)+') '+d.substring(3,6)+'-'+d.substring(6):p; }
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function escA(s){ return String(s||'').replace(/'/g,'&#39;').replace(/"/g,'&quot;'); }
+function escJ(s){ return String(s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
 </script>
 </body>
 </html>
