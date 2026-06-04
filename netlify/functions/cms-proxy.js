@@ -11,56 +11,49 @@ exports.handler = async function(event) {
     }
   }
 
-  // Try multiple URL formats — CMS DKAN API variations
-  var urls = [
-    'https://data.cms.gov/provider-data/api/1/datastore/query/4pq5-n9py/0?limit=' + limit + '&offset=' + offset + '&count=true&results=true',
-    'https://data.cms.gov/provider-data/api/1/datastore/query/4pq5-n9py/0?limit=' + limit + '&offset=' + offset,
-    'https://data.cms.gov/provider-data/api/1/datastore/sql?query=%5BSELECT%20*%20FROM%204pq5-n9py%5D%5BLIMIT%20' + limit + '%20OFFSET%20' + offset + '%5D'
-  ];
+  var url = 'https://data.cms.gov/provider-data/api/1/datastore/query/4pq5-n9py/0' +
+            '?limit=' + limit +
+            '&offset=' + offset +
+            '&count=true&results=true';
 
-  var lastError = '';
-  var i;
+  try {
+    var response = await fetch(url, {
+      headers: { 'Accept': 'application/json' }
+    });
 
-  for (i = 0; i < urls.length; i++) {
-    try {
-      var response = await fetch(urls[i], {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      });
-
-      var responseText = await response.text();
-
-      if (!response.ok) {
-        lastError = 'URL ' + i + ' HTTP ' + response.status + ': ' + responseText.substring(0, 200);
-        continue;
-      }
-
+    if (!response.ok) {
+      var errText = await response.text();
       return {
-        statusCode: 200,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': 'Content-Type',
-          'Access-Control-Allow-Methods': 'GET, OPTIONS'
-        },
-        body: responseText
+        statusCode: response.status,
+        headers: { 'Access-Control-Allow-Origin': '*' },
+        body: JSON.stringify({
+          error: 'CMS returned ' + response.status,
+          detail: errText.substring(0, 500)
+        })
       };
-
-    } catch(err) {
-      lastError = 'URL ' + i + ' threw: ' + err.message;
     }
-  }
 
-  // All URLs failed — return detailed error for debugging
-  return {
-    statusCode: 500,
-    headers: { 'Access-Control-Allow-Origin': '*' },
-    body: JSON.stringify({
-      error: 'All CMS URL formats failed',
-      detail: lastError,
-      urls_tried: urls
-    })
-  };
+    var data = await response.text();
+
+    return {
+      statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET, OPTIONS'
+      },
+      body: data
+    };
+
+  } catch(err) {
+    return {
+      statusCode: 500,
+      headers: { 'Access-Control-Allow-Origin': '*' },
+      body: JSON.stringify({
+        error: err.message,
+        note: 'fetch failed in Node — check Node version'
+      })
+    };
+  }
 };
