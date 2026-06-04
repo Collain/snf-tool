@@ -1,6 +1,6 @@
 exports.handler = async function(event) {
   var offset = 0;
-  var limit = 2000;
+  var limit = 500;
 
   if (event.queryStringParameters) {
     if (event.queryStringParameters.offset) {
