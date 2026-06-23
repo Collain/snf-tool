@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>SNF National Research Tool v13.0</title>
+<title>SNF National Research Tool v14.0</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{width:100%;min-height:100%;font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1e293b;font-size:13px;}
@@ -104,13 +104,13 @@ tbody td{padding:5px 8px;vertical-align:middle;font-size:0.7rem;color:#334155;}
 <body>
 
 <div id="hdr">
-  <h1>&#127973; SNF National Research Tool &mdash; v13.0 Final</h1>
-  <p>Live from data.cms.gov via snfresearch.netlify.app &bull; All 50 States &bull; SharePoint Ready</p>
+  <h1>&#127973; SNF National Research Tool &mdash; v14.0</h1>
+  <p>Live from data.cms.gov via snfresearch.netlify.app &bull; All 50 States &bull; Choose where to save exports</p>
   <div id="hdr-btns">
     <button class="btn btn-green" id="loadBtn" onclick="startLoad()">&#9889; Load CMS Data</button>
     <button class="btn btn-gray" id="cancelBtn" onclick="doCancel()" style="display:none;">&#9632; Cancel</button>
     <button class="btn btn-purple" onclick="loadDemo()">&#128301; Demo</button>
-    <button class="btn btn-white" onclick="doExport()">&#11015; Export CSV</button>
+    <button class="btn btn-white" onclick="doExport()">&#11015; Export CSV (choose folder)</button>
     <button class="btn btn-white" onclick="window.print()">&#128424; Print</button>
     <button class="btn btn-gray" onclick="doReset()">&#8635; Reset</button>
   </div>
@@ -169,9 +169,10 @@ tbody td{padding:5px 8px;vertical-align:middle;font-size:0.7rem;color:#334155;}
   </div>
 
   <div id="noData" class="banner banner-info">
-    &#127973; Welcome to SNF National Research Tool v13.0<br/>
+    &#127973; Welcome to SNF National Research Tool v14.0<br/>
     Click <b>&#9889; Load CMS Data</b> to fetch all ~15,000 US nursing facilities live from <b>data.cms.gov</b>.<br/>
-    Click <b>&#128301; Demo</b> to explore instantly with sample data.
+    Click <b>&#128301; Demo</b> to explore instantly with sample data.<br/>
+    <b>New:</b> Export now lets you choose the save folder (Chrome/Edge).
   </div>
   <div id="noResults" class="banner banner-warn" style="display:none;">&#128269; No facilities match your current filters.</div>
 
@@ -228,7 +229,6 @@ tbody td{padding:5px 8px;vertical-align:middle;font-size:0.7rem;color:#334155;}
 var ALL=[],FILT=[],MANUAL={},SKEY='provname',SDIR=1,STOP=false,BUSY=false;
 var CR=String.fromCharCode(13),LF=String.fromCharCode(10),CRLF=CR+LF;
 
-// YOUR CONFIRMED WORKING NETLIFY PROXY
 var PROXY='https://snfresearch.netlify.app/.netlify/functions/cms-proxy';
 var SIZE=500;
 
@@ -307,7 +307,7 @@ function goFetch(offset,pageNum){
         setDot('error');
         setP(0,'Failed',0);
         document.getElementById('progFill').style.background='#ef4444';
-        setBanner('error','&#10006; <b>Error:</b> '+e.message+'<br>Check Netlify function logs at app.netlify.com. Or click <b>Demo</b> to explore the tool.');
+        setBanner('error','&#10006; <b>Error:</b> '+e.message+'<br>Check Netlify function logs. Or click <b>Demo</b> to explore the tool.');
         document.getElementById('noData').style.display='block';
       }
     });
@@ -465,7 +465,7 @@ function renderTbl(){
     rows+='<td><div class="ce" contenteditable="true" data-ph="notes..." data-id="'+escA(r.provnum)+'" data-f="notes" oninput="saveM(this)">'+esc(m.notes)+'</div></td>';
     rows+='</tr>';
   }
-  if(FILT.length>500){rows+='<tr><td colspan="18" style="text-align:center;padding:12px;background:#fffde7;font-size:0.72rem;color:#854d0e;font-weight:700;">&#9888; Showing 500 of '+FILT.length.toLocaleString()+' results. Use filters to narrow down or Export CSV for full list.</td></tr>';}
+  if(FILT.length>500){rows+='<tr><td colspan="18" style="text-align:center;padding:12px;background:#fffde7;font-size:0.72rem;color:#854d0e;font-weight:700;">Showing 500 of '+FILT.length.toLocaleString()+' results. Use filters to narrow down or Export CSV for full list.</td></tr>';}
   tbody.innerHTML=rows;
 }
 function saveM(el){var id=el.getAttribute('data-id'),f=el.getAttribute('data-f');if(!MANUAL[id])MANUAL[id]={email:'',website:'',notes:''};MANUAL[id][f]=el.innerText.trim();}
@@ -559,20 +559,47 @@ function buildStateDD(){
   for(i=0;i<sts.length;i++){var s=sts[i],o=document.createElement('option');o.value=s;o.textContent=s+(STATES[s]?' \u2014 '+STATES[s]:'');sel.appendChild(o);}
 }
 
-function doExport(){
-  if(!FILT.length){alert('No data to export. Load data first.');return;}
+// ── EXPORT — now lets you choose folder via Save dialog ────────
+function buildExportCSV(){
   var hdrs=['CMS_ID','Facility_Name','Legal_Name','Address','City','County','State','ZIP','Phone','Beds','Avg_Residents','Overall_Stars','Health_Stars','Staffing_Stars','QM_Stars','Ownership','Certification','Penalties','Fines_USD','Email','Website','Notes','Data_Date'];
   var rows=[hdrs.join(',')],i,r,m;
   for(i=0;i<FILT.length;i++){
     r=FILT[i];m=MANUAL[r.provnum]||{};
     rows.push([r.provnum,'"'+r.provname.replace(/"/g,'""')+'"','"'+r.legal.replace(/"/g,'""')+'"','"'+r.address.replace(/"/g,'""')+'"',r.city,r.county,r.state,r.zip,'"'+r.phone+'"',r.bedcert,r.avgres,r.stars,r.healthstars,r.staffstars,r.qmstars,'"'+r.ownership.replace(/"/g,'""')+'"','"'+r.certified.replace(/"/g,'""')+'"',r.penalties,r.fines,'"'+(m.email||'')+'"','"'+(m.website||'')+'"','"'+(m.notes||'').replace(/"/g,'""')+'"',r.procdate].join(','));
   }
-  var csv=rows.join(CRLF);
+  return rows.join(CRLF);
+}
+
+async function doExport(){
+  if(!FILT.length){alert('No data to export. Load data first.');return;}
+  var csv=buildExportCSV();
+  var suggested='SNF_National_'+new Date().toISOString().substring(0,10)+'.csv';
+
+  // Modern browsers (Chrome/Edge): show a "Save As" dialog to choose folder
+  if('showSaveFilePicker' in window){
+    try{
+      var handle=await window.showSaveFilePicker({
+        suggestedName:suggested,
+        types:[{description:'CSV File',accept:{'text/csv':['.csv']}}]
+      });
+      var writable=await handle.createWritable();
+      await writable.write(csv);
+      await writable.close();
+      setBanner('success','&#10003; Exported <b>'+FILT.length.toLocaleString()+' facilities</b> to your chosen location: <b>'+esc(handle.name)+'</b>');
+      return;
+    }catch(e){
+      if(e.name==='AbortError'){return;} // user cancelled the dialog
+      // any other error → fall through to download fallback
+    }
+  }
+
+  // Fallback (Firefox/Safari or blocked): standard download to Downloads folder
   var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
   var url=URL.createObjectURL(blob);
   var a=document.createElement('a');
-  a.href=url;a.setAttribute('download','SNF_National_v13_'+new Date().toISOString().substring(0,10)+'.csv');
+  a.href=url;a.setAttribute('download',suggested);
   document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  setBanner('success','&#10003; Exported '+FILT.length.toLocaleString()+' facilities (saved to your Downloads folder &mdash; your browser does not support folder selection).');
 }
 
 function doReset(){
